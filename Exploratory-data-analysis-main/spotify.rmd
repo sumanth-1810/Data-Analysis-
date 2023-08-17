@@ -1,0 +1,84 @@
+---
+title: "My R Markdown Document"
+output:
+  word_document: default
+  pdf_document:
+    latex_engine: pdflatex
+---
+#https://github.com/AMANAFTAB/Exploratory-data-analysis.git
+```{r}
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(e1071)
+library(moments)
+library(tinytex)
+spotify <- read.csv("C:/Users/amana/OneDrive/Documents/data.csv")
+head(spotify)
+names(spotify)
+```
+
+#read.csv() command is used to read a CSV (Comma-Separated Values) file and load it into R as a data frame.The head() function is used to display the first few rows of a data frame or a vector. By default, it shows the first six rows of the data.The tail() function is similar to head(), but it displays the last few rows of a data frame or a vector. By default, it shows the last six rows of the data.#
+
+```{r}
+str(spotify)
+summary(spotify)
+nrow(spotify)
+ncol(spotify)
+dim(spotify)
+names(spotify)
+colnames(spotify)
+spotify$energy
+filter(spotify, key==8)
+select(spotify, instrumentalness, key)
+```
+
+#The str() function provides a compact summary of the structure of an R object.The summary() function provides summary statistics for each variable in a data frame. It displays information such as minimum, maximum, mean, median, and quartiles for numeric variables, and frequency tables for categorical variables.The nrow() function returns the number of rows in a data frame.The ncol() function returns the number of columns in a data frame.The dim() function returns the dimensions of a data frame, i.e., the number of rows and columns.The names() function returns the column names of a data frame.The colnames() function is similar to names(), but it specifically returns the column names of a data frame.This command accesses the energy column in the spotify data frame using the \$ operator.The filter() function is part of the dplyr package and is used for filtering rows based on specified conditions. In this case, it filters the spotify data frame to only include rows where the key variable is equal to 8.The select() function from the dplyr package is used to choose specific variables (columns) from a data frame. In this case, it selects the instrumentalness and key variables from the spotify data frame.
+
+```{r}
+arrange(spotify, energy)
+distinct(spotify, key)
+group_by(spotify, instrumentalness)
+summarise(spotify, mean_column = mean(key))
+sample_n(spotify, 5)
+sample_frac(spotify, 0) 
+```
+
+#The arrange() function from the dplyr package is used to sort a data frame based on one or more columns.The distinct() function from the dplyr package is used to find unique rows in a data frame or unique combinations of specific variables.The group_by() function from the dplyr package is used to group a data frame by one or more variables.The summarise() function from the dplyr package is used to calculate summary statistics for specific variables in a data frame.The sample_n() function from the dplyr package is used to randomly sample a specified number of rows from a data frame.The sample_frac() function from the dplyr package is used to randomly sample a fraction of rows from a data frame.
+
+```{r}
+table(spotify$energy)
+which(spotify$key == 8)
+unique(spotify$key)
+is.factor(spotify$instrumentalness)
+as.factor(spotify$energy)
+table(spotify$key)
+prop.table(spotify$energy)
+quantile(spotify$key, 0.75)
+scale(spotify$key)
+round(spotify$key, 1) 
+floor(spotify$energy)
+ceiling(spotify$energy)
+```
+
+#The table() function creates a frequency table for a variable.The which() function returns the indices or positions where a specified condition is true.The unique() function returns the unique values of a variable.The is.factor() function is used to check if a variable is a factor. It returns TRUE if the instrumentalness variable in the spotify data frame is a factor and FALSE otherwise.The as.factor() function is used to convert a variable to a factor.Similar to the first table() command, this creates a frequency table for the key variable in the spotify data frame, displaying the count of each unique value.The prop.table() function calculates the proportions of each value in a variable. The quantile() function calculates the specified quantile of a variable.The scale() function is used to standardize a variable by subtracting its mean and dividing by its standard deviation. The round() function is used to round numeric values to a specified number of decimal places.The floor() function is used to round down numeric values to the nearest integer less than or equal to the value.The ceiling() function is used to round up numeric values to the nearest integer greater than or equal to the value.
+
+```{r}
+all_high_energy <- all(spotify$energy > 0.5)
+all_high_energy
+#This command checks if all values in the energy column of the "spotify" dataset are greater than 0.5. It returns TRUE if all values satisfy the condition, otherwise FALSE.
+any_low_energy <- any(spotify$energy < 0.2)
+any_low_energy
+#This command checks if any value in the energy column of the "spotify" dataset is less than 0.2. It returns TRUE if at least one value satisfies the condition, otherwise FALSE.
+contains_genre <- "pop" %in% spotify$genre
+contains_genre
+#This command checks if the value "pop" exists in the genre column of the "spotify" dataset. It returns TRUE if the value is found, otherwise FALSE.
+same_energy_key <- all(spotify$energy == spotify$key)
+same_energy_key
+#This command checks if the energy column is equal to the key column element-wise in the "spotify" dataset. It returns TRUE if every corresponding pair of values is equal, otherwise FALSE.
+has_missing_values <- any(is.na(spotify$duration_ms))
+has_missing_values
+#This command checks if the duration_ms column in the "spotify" dataset contains any missing values (represented by NA). It returns TRUE if there are any missing values, otherwise FALSE.
+```
+
+\`\`\`
