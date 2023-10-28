@@ -401,3 +401,14 @@ hist(pokemon$base_total,
      ylab = "Frequency",
      main = "Pokémon base_total Stats Distribution")
 ```
+
+#######################################################################
+
+```{R}
+# Check for missing values
+missing_values <- colSums(is.na(df))
+print(missing_values)
+
+# Fill missing values with the mean of each column
+df[is.na(df)] <- sapply(df, function(x) ifelse(is.na(x), mean(x, na.rm = TRUE), x))
+```
