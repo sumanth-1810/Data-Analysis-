@@ -13,7 +13,7 @@ library(ggplot2)
 library(e1071)
 library(moments)
 library(tinytex)
-spotify <- read.csv("C:/Users/amana/OneDrive/Documents/data.csv")
+spotify <- read.csv("C:/Users/Sumanth/OneDrive/Documents/data.csv")
 head(spotify)
 names(spotify)
 ```
